@@ -1,3 +1,3 @@
 pub mod _entities;
-pub mod notes;
+pub mod tunnels;
 pub mod users;

@@ -48,3 +48,5 @@ pub enum Users {
     EmailVerificationSentAt,
     EmailVerifiedAt,
 }
+
+// cargo loco generate model tunnels url:string! user:references

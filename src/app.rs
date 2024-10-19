@@ -15,19 +15,13 @@ use migration::Migrator;
 use sea_orm::DatabaseConnection;
 
 use crate::{
-    controllers,
-    models::_entities::{notes, users},
-    tasks,
+    controllers, models::_entities::tunnels, models::_entities::users, tasks,
     workers::downloader::DownloadWorker,
 };
 
 pub struct App;
 #[async_trait]
 impl Hooks for App {
-    fn app_name() -> &'static str {
-        env!("CARGO_CRATE_NAME")
-    }
-
     fn app_version() -> String {
         format!(
             "{} ({})",
@@ -38,6 +32,10 @@ impl Hooks for App {
         )
     }
 
+    fn app_name() -> &'static str {
+        env!("CARGO_CRATE_NAME")
+    }
+
     async fn boot(mode: StartMode, environment: &Environment) -> Result<BootResult> {
         create_app::<Self, Migrator>(mode, environment).await
     }
@@ -45,7 +43,6 @@ impl Hooks for App {
     fn routes(_ctx: &AppContext) -> AppRoutes {
         AppRoutes::with_default_routes()
             .prefix("/api")
-            .add_route(controllers::notes::routes())
             .add_route(controllers::auth::routes())
             .add_route(controllers::user::routes())
     }
@@ -61,13 +58,12 @@ impl Hooks for App {
 
     async fn truncate(db: &DatabaseConnection) -> Result<()> {
         truncate_table(db, users::Entity).await?;
-        truncate_table(db, notes::Entity).await?;
+        truncate_table(db, tunnels::Entity).await?;
         Ok(())
     }
 
     async fn seed(db: &DatabaseConnection, base: &Path) -> Result<()> {
         db::seed::<users::ActiveModel>(db, &base.join("users.yaml").display().to_string()).await?;
-        db::seed::<notes::ActiveModel>(db, &base.join("notes.yaml").display().to_string()).await?;
         Ok(())
     }
 }
