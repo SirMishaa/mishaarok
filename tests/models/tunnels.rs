@@ -1,5 +1,5 @@
-use mishaarok::app::App;
 use loco_rs::testing;
+use mishaarok::app::App;
 use serial_test::serial;
 
 macro_rules! configure_insta {
@@ -18,6 +18,7 @@ async fn test_model() {
     let boot = testing::boot_test::<App>().await.unwrap();
     testing::seed::<App>(&boot.app_context.db).await.unwrap();
 
+    // Todo: add model test here
     // query your model, e.g.:
     //
     // let item = models::posts::Model::find_by_pid(

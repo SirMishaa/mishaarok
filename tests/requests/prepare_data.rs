@@ -2,8 +2,8 @@ use axum::http::{HeaderName, HeaderValue};
 use loco_rs::{app::AppContext, TestServer};
 use mishaarok::{models::users, views::auth::LoginResponse};
 
-const USER_EMAIL: &str = "test@loco.com";
-const USER_PASSWORD: &str = "1234";
+const USER_EMAIL: &str = "mishaa.pro@proton.me";
+const USER_PASSWORD: &str = "password";
 
 pub struct LoggedInUser {
     pub user: users::Model,
