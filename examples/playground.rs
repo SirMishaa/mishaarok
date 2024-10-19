@@ -1,6 +1,8 @@
 #[allow(unused_imports)]
 use loco_rs::{cli::playground, prelude::*};
 use mishaarok::app::App;
+use mishaarok::models::_entities::sea_orm_active_enums::TunnelsState;
+use mishaarok::models::_entities::{tunnels, users};
 
 #[tokio::main]
 async fn main() -> loco_rs::Result<()> {
@@ -16,6 +18,19 @@ async fn main() -> loco_rs::Result<()> {
     // let res = articles::Entity::find().all(&ctx.db).await.unwrap();
     // println!("{:?}", res);
     println!("welcome to playground. edit me at `examples/playground.rs`");
+
+    let user = users::ActiveModel {
+        ..Default::default()
+    };
+
+    let tunnel_active_model = tunnels::ActiveModel {
+        created_at: Default::default(),
+        updated_at: Default::default(),
+        id: Default::default(),
+        url: Default::default(),
+        user_id: Default::default(),
+        state: ActiveValue::Set(TunnelsState::Active),
+    };
 
     Ok(())
 }
