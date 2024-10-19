@@ -1,0 +1,3 @@
+[tasks.start]
+command = "cargo"
+args = ["loco start", "--", "--worker"]
