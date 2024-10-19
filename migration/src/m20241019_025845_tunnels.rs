@@ -1,5 +1,4 @@
 use loco_rs::schema::table_auto_tz;
-use sea_orm_migration::sea_orm::EnumIter;
 use sea_orm_migration::{prelude::*, schema::*, sea_query::extension::postgres::Type};
 
 #[derive(DeriveMigrationName)]

@@ -42,9 +42,9 @@ async fn can_create_with_password() {
     let boot = testing::boot_test::<App>().await.unwrap();
 
     let params = RegisterParams {
-        email: "test@framework.com".to_string(),
-        password: "1234".to_string(),
-        name: "framework".to_string(),
+        email: "mishaa.pro@proton.me".to_string(),
+        password: "password".to_string(),
+        name: "sirmishaa".to_string(),
     };
     let res = Model::create_with_password(&boot.app_context.db, &params).await;
 
@@ -66,9 +66,9 @@ async fn handle_create_with_password_with_duplicate() {
     let new_user: Result<Model, ModelError> = Model::create_with_password(
         &boot.app_context.db,
         &RegisterParams {
-            email: "user1@example.com".to_string(),
-            password: "1234".to_string(),
-            name: "framework".to_string(),
+            email: "mishaa.pro@proton.me".to_string(),
+            password: "password".to_string(),
+            name: "sirmishaa".to_string(),
         },
     )
     .await;
@@ -83,7 +83,7 @@ async fn can_find_by_email() {
     let boot = testing::boot_test::<App>().await.unwrap();
     testing::seed::<App>(&boot.app_context.db).await.unwrap();
 
-    let existing_user = Model::find_by_email(&boot.app_context.db, "user1@example.com").await;
+    let existing_user = Model::find_by_email(&boot.app_context.db, "mishaa.pro@proton.me").await;
     let non_existing_user_results =
         Model::find_by_email(&boot.app_context.db, "un@existing-email.com").await;
 
@@ -205,7 +205,7 @@ async fn can_reset_password() {
         .await
         .unwrap();
 
-    assert!(user.verify_password("12341234"));
+    assert!(user.verify_password("password"));
 
     assert!(user
         .clone()
